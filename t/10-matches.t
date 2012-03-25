@@ -1,4 +1,5 @@
 #!perl -T
+# String Validator Common.
 
 use Test::More tests => 4;
 
@@ -14,7 +15,8 @@ is ( $Validator->Start( 'snargle@snugg.com', 'snargle@snugg.com' ), 0,
 	'Matching strings pass.' ) ;
 #print $Validator->{ errstring }, "\n" ;
 
-is ( $Validator->Start( 'aBC123@123.net', '1234567@689.org' ), 1,
+
+is ( $Validator->Start( 'aBC123@123.net', '1234567@689.org' ), 99,
 	'Mismatched strings fail.' ) ;
 is ( $Validator->CheckCommon( 'aBC123@123.net', '1234567@689.org' ), 1,
 	'The same test as previous using CheckCommon.' ) ;

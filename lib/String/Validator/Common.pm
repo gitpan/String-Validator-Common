@@ -12,11 +12,11 @@ String::Validator::Common - Routines shared by String::Validator Modules.
 
 =head1 VERSION
 
-Version 0.93
+Version 0.96
 
 =cut
 
-our $VERSION = '0.93';
+our $VERSION = '0.96';
 
 sub new {
     my $class = shift ;
@@ -53,7 +53,7 @@ sub Start {
     if ( 0 == length $string2 ) {  }
     elsif ( $string1  ne $string2 ) {
 		$self->IncreaseErr( 'Strings don\'t match.' ) ;
-		return 1 ;
+		return 99 ;
 	}
     $self->{string} = $string1 ;
     return 0 ;
@@ -162,7 +162,7 @@ $self->{error}, and $self->{string} to NULL, 0, NULL. If no errors are found
 error and errstring will remain 0 and NULL. string will be used to hold
 the string being evaluated. Arguments are the
 string to be evaluated and optionally a second string to be compared with the
-first. If the strings are mismatched the sub will return 1, and string will
+first. If the strings are mismatched the sub will return 99, and string will
 remain NULL, the inheriting module should immediately return the error and
 not contine.
 
@@ -180,7 +180,9 @@ CheckCommon is just a shortcut to run Start and Length.
 
 A stub for testing, overridden in actual string validator classes.
 
+=head2 Errstr, Errcnt, String
 
+Provides these methods for inheritance as described in the String::Validator documentation.
 
 =head1 AUTHOR
 
