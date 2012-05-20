@@ -1,5 +1,6 @@
 Revision history for String-Validator-Common
 
+0.97	2012-04-14 Added lowercase versions of methods.
 0.96    Corrected some typos in documentation and other trivial changes.
 
 

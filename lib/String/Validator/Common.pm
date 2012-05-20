@@ -12,11 +12,11 @@ String::Validator::Common - Routines shared by String::Validator Modules.
 
 =head1 VERSION
 
-Version 0.96
+Version 0.97
 
 =cut
 
-our $VERSION = '0.96';
+our $VERSION = '0.97';
 
 sub new {
     my $class = shift ;
@@ -50,7 +50,7 @@ sub Start {
 # Failing the string match alse necessitates immediate
 # error return as the other tests are meaningless as
 # we cannot know if either or neither string is the password.
-    if ( 0 == length $string2 ) {  }
+    if ( eval {0 == length $string2} ) {  }
     elsif ( $string1  ne $string2 ) {
 		$self->IncreaseErr( 'Strings don\'t match.' ) ;
 		return 99 ;
@@ -102,7 +102,7 @@ sub Errcnt  {
 sub Errstr  {
 	my $self = shift ;
 	return $self->{ errstring }
-	}
+	}	
 
 sub IsNot_Valid {
 	( my $self, my $string1, my $string2 ) = @_ ;
@@ -120,6 +120,13 @@ sub String {
 	my $self = shift ;
 	return $self->{ string } ;
 	}
+	
+# The lowercase version of methods.	
+sub errcnt { my $self = shift ; $self->Errcnt() }
+sub errstr { my $self = shift ; $self->Errstr() }	
+sub isnot_valid { my $self = shift ; $self->IsNot_Valid() }
+sub is_valid { my $self = shift ; $self->Is_Valid() }
+sub string { my $self = shift ; $self->String() }
 
 =pod
 
