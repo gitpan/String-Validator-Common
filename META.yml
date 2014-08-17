@@ -22,4 +22,4 @@ resources:
   bugtracker: https://github.com/brainbuz/String-Validator/issues
   homepage: https://github.com/brainbuz/String-Validator
   repository: https://github.com/brainbuz/String-Validator.git
-version: '1.00'
+version: '1.01'

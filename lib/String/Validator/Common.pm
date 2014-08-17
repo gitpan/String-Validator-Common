@@ -1,13 +1,10 @@
 package String::Validator::Common;
-
+$String::Validator::Common::VERSION = '1.01';
 # ABSTRACT: Base Module for creating new String::Validator Modules.
 
 use 5.008;
 use strict;
 use warnings;
-
-our $VERSION = 1.00;
-
 
 sub new {
     my $class = shift;
@@ -123,17 +120,12 @@ sub String {
     return $self->{string};
 }
 
-# Serious todo version needs to return all SV class versions
-# for loaded modules.
-sub Version { return $VERSION }
-
 # The lowercase version of methods.
 sub errcnt      { my $self = shift; $self->Errcnt() }
 sub errstr      { my $self = shift; $self->Errstr() }
 sub isnot_valid { my $self = shift; $self->IsNot_Valid() }
 sub is_valid    { my $self = shift; $self->Is_Valid() }
 sub string      { my $self = shift; $self->String() }
-sub version { &String::Validator::Common::Version() }
 
 
 1;    # End of String::Validator::Common
@@ -150,24 +142,25 @@ String::Validator::Common - Base Module for creating new String::Validator Modul
 
 =head1 VERSION
 
-version 1.00
+version 1.01
 
 =head1 DESCRIPTION
 
 A base module for use in creating new String Validators.
 
-=head1 NAME
-
-String::Validator::Common - Routines shared by String::Validator Modules.
-
-=head1 VERSION
-
-version 1.00
-
 =head1 String::Validator::Common Methods and Usage
 
-Modules Using String Validator Common use its' new method and then extend the
-attributes in their own new methods.
+=head2 Public Methods
+
+The Following Methods are meant to be provided by sublcasses as Public Methods: B<IsValid, IsNotValid, Errstr, Errcnt, String>.
+
+=head2 Semi-Private Methods
+
+The remaining methods are meant for use within subclasses of String::Validator::Common. They are not preceded with _ characters because they are being exposed from SVC to the inheriting class.
+
+=head2 new
+
+Modules Using String Validator Common extend the attributes in their own new methods.
 
  use String::Validator::Common;
  sub new {
@@ -181,12 +174,6 @@ attributes in their own new methods.
  return $self ;
  }
 
-=head1 Methods String::Validator::Common provides
-
-=head2 errcnt, errstr, new, string, version
-
-These methods are described in the String::Validator Master Module and implemented here.
-
 =head2 Check
 
 Check is a stub subroutine, that you will replace in any Validator Module you write
@@ -199,7 +186,7 @@ Takes a string and optionally a second string (if you want to make sure two copi
 
 =head2 Is_Valid
 
-Takes a string and optionally a second string (if you want to make sure two copies of a string are identical as well). Runs the Check subroutine and returns 1 if Check returned 0, and 0 if Check returned a true value. If you want ->Errcnt() count or ->Errstr you will need to request them via there methods before another string is processed.
+Takes a string and optionally a second string (if you want to make sure two copies of a string are identical as well). Runs the Check subroutine and returns 1 if Check returned 0, and 0 if Check returned a true value. If you want ->Errcnt() count or ->Errstr you will need to request them via their methods before another string is processed.
 
 =head2 IncreaseErr
 
@@ -207,7 +194,7 @@ A String::Validator contains two error variables error and errstring. When an
 error is found, simply pass a brief description to this method to increment
 the errorcount, and append the present description to the errstring.
 
- if ( 1 != 2 ) { $self->IncreaseErr( qq /1 Still Doesn't equal 2!/ ) }
+ if ( 1 != 2 ) { $self->IncreaseErr( q/1 Still Doesn't equal 2!/ ) }
 
 =head2 Start
 
@@ -218,7 +205,7 @@ the string being evaluated. Arguments are the
 string to be evaluated and optionally a second string to be compared with the
 first. If the strings are mismatched the sub will return 99, and string will
 remain NULL, the inheriting module should immediately return the error and
-not contine.
+not contine. 
 
 =head2 Length
 
@@ -234,13 +221,13 @@ CheckCommon is just a shortcut to run Start and Length.
 
 Provides these methods for inheritance as described in the String::Validator documentation.
 
-=head2 Version
+=head2 is_valid, isnot_valid, errcnt, errstr, string
 
-Version returns the internal version number of the module.
+Permit LowerCase invokation of these methods.
 
-=head2 version, is_valid, isnot_valid, errcnt, errstr
+=head1 BUGS
 
-Allow LowerCase invokation of these methods.
+Please report any bugs or feature requests through the web interface at L<https://github.com/brainbuz/String-Validator/issues>. I will be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 =head1 AUTHOR
 
